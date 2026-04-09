@@ -4,13 +4,13 @@ A deep-learning pipeline that detects image forgeries using a fine-tuned **ResNe
 
 ---
 
-## 🗂️ Project Flow Diagram
+##  Project Flow Diagram
 
 ```mermaid
 flowchart TD
-    A([🖼️ Input: CASIA2 Dataset\nAuthentic & Tampered Images]) --> B
+    A([ Input: CASIA2 Dataset\nAuthentic & Tampered Images]) --> B
 
-    subgraph Preprocessing["📦 Data Preprocessing"]
+    subgraph Preprocessing[" Data Preprocessing"]
         B[List & Split Images\nAuthentic vs. Tampered]
         B --> C[Resize to 224×224\nImageNet Normalisation]
         C --> D[PyTorch DataLoader\nBatch Size = 12]
@@ -18,7 +18,7 @@ flowchart TD
 
     D --> E
 
-    subgraph Training["🧠 Model Training"]
+    subgraph Training[" Model Training"]
         E[Pretrained ResNet-18\nFreeze All Layers]
         E --> F[Unfreeze layer4 + FC Head\nBinary Output: Authentic / Tampered]
         F --> G[Fine-tune with\nCrossEntropyLoss & Adam Optimiser\nEpochs = 2  LR = 1e-4]
@@ -29,12 +29,12 @@ flowchart TD
 
     I --> J
 
-    subgraph Inference["🔍 Inference on New Image"]
+    subgraph Inference[" Inference on New Image"]
         J[Load Checkpoint\n+ Inference Transform]
         J --> K[Forward Pass → Softmax\nClass Probabilities]
         K --> L{Prediction}
-        L -- Authentic --> M1([✅ Authentic])
-        L -- Tampered --> M2([⚠️ Tampered])
+        L -- Authentic --> M1([ Authentic])
+        L -- Tampered --> M2([ Tampered])
     end
 
     K --> N
@@ -47,7 +47,7 @@ flowchart TD
 
     P --> Q
 
-    subgraph LLM["🤖 LLM Natural-Language Explanation"]
+    subgraph LLM[" LLM Natural-Language Explanation"]
         Q[Send Prediction + Confidence\nto Ollama LLaMA 3.2:3b]
         Q --> R[Generate Plain-English\nForgery Summary]
     end
@@ -55,12 +55,12 @@ flowchart TD
     P --> S
     R --> S
 
-    subgraph Frontend["🖥️ Frontend / UI"]
+    subgraph Frontend[" Frontend / UI"]
         S[Gradio Interface\nUpload Image]
         S --> T[Display: Prediction · Confidence\nGrad-CAM Heatmap · LLM Summary]
     end
 
-    T --> U([📊 Final Output\nExplainable Forgery Detection Result])
+    T --> U([ Final Output\nExplainable Forgery Detection Result])
 
     style Preprocessing fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a
     style Training      fill:#dcfce7,stroke:#16a34a,color:#14532d
@@ -72,7 +72,7 @@ flowchart TD
 
 ---
 
-## 🔑 Key Components
+##  Key Components
 
 | Component | Details |
 |-----------|---------|
@@ -85,7 +85,7 @@ flowchart TD
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Install Dependencies
 ```bash
@@ -107,7 +107,7 @@ Open `xai_frontend.html` in your browser — it embeds the Gradio app in a clean
 
 ---
 
-## 📁 Repository Structure
+##  Repository Structure
 
 ```
 .
@@ -121,7 +121,7 @@ Open `xai_frontend.html` in your browser — it embeds the Gradio app in a clean
 
 ---
 
-## 🧪 Pipeline Summary
+##  Pipeline Summary
 
 1. **Data Loading** — Scans `CASIA2/Au` (authentic) and `CASIA2/Tp` (tampered) folders.
 2. **Preprocessing** — Resize → Normalize (ImageNet stats) → DataLoader.
